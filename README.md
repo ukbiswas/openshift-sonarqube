@@ -13,7 +13,7 @@ Create an account at http://openshift.redhat.com/
 
 Create a DIY application. If you may add a PostgreSQL cartridge.
 
-    rhc app create sonar diy-0.1 postgresql-9.2
+    rhc app create sonar diy-0.1 mysql-5.5
 
 Add this upstream SonarQube quickstart repo
 
