@@ -2,9 +2,9 @@
 ROOT=$OPENSHIFT_DATA_DIR
 SONAR_VERSION=4.1.1
 
-if [[ $OPENSHIFT_POSTGRESQL_DB_URL ]]
+if [[ $OPENSHIFT_MYSQL_DB_URL ]]
 then
-  PG_URL="$OPENSHIFT_POSTGRESQL_DB_HOST:$OPENSHIFT_POSTGRESQL_DB_PORT/$PGDATABASE"
+  MYSQL_URL="$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/$OPENSHIFT_GEAR_NAME"
 fi
 
 cd $ROOT
@@ -20,12 +20,12 @@ cd sonarqube/conf
 sed -i "s/^#sonar.web.host.*$/sonar.web.host=$OPENSHIFT_DIY_IP/" sonar.properties
 sed -i "s/^#sonar.web.port.*$/sonar.web.port=$OPENSHIFT_DIY_PORT/" sonar.properties
 
-if [[ $PG_URL ]]
+if [[ $MYSQL_URL ]]
 then
-  sed -i "s/^sonar.jdbc.username.*$/sonar.jdbc.username=$OPENSHIFT_POSTGRESQL_DB_USERNAME/" sonar.properties
-  sed -i "s/^sonar.jdbc.password.*$/sonar.jdbc.password=$OPENSHIFT_POSTGRESQL_DB_PASSWORD/" sonar.properties
+  sed -i "s/^sonar.jdbc.username.*$/sonar.jdbc.username=$OPENSHIFT_MYSQL_DB_USERNAME/" sonar.properties
+  sed -i "s/^sonar.jdbc.password.*$/sonar.jdbc.password=$OPENSHIFT_MYSQL_DB_PASSWORD/" sonar.properties
   sed -i 's/^sonar.jdbc.url/#sonar.jdbc.url/' sonar.properties
-  sed -i "s;^.*sonar.jdbc.url=jdbc:postgresql.*$;sonar.jdbc.url=jdbc:postgresql://$PG_URL;" sonar.properties
+  sed -i "s;^.*sonar.jdbc.url=jdbc:mysql.*$;sonar.jdbc.url=jdbc:mysql://$MYSQL_URL;" sonar.properties
 fi
 
 cd $OPENSHIFT_DATA_DIR
