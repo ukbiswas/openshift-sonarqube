@@ -16,6 +16,8 @@ Create a DIY application. If you may add a PostgreSQL cartridge.
     rhc app create sonar diy-0.1 mysql-5.5
 
 Add this upstream SonarQube quickstart repo
+    
+
     cd sonar
     git rm -r diy .openshift misc README.md
     git remote add upstream -m master https://github.com/ukbiswas/openshift-sonarqube.git
